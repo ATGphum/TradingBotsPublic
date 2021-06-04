@@ -1,5 +1,6 @@
 from binancecontroller import BinanceController
 from enums import *
+from datetime import datetime
 import functools
 import time
 import pandas as pd
@@ -33,6 +34,7 @@ class BacktestRepository:
             # get current window dataframe
             focus_frame = globalframe.iloc[bottom_index : top_index]
             coin_price = float(focus_frame['close'].iloc[-1])
+            current_unixtime = float(focus_frame.index[-1]) / 1000
 
             # add the focus frame to each list in algo arguments list     
             temp_algo_args = list(map(lambda args: [focus_frame] + args, algo_args.copy()))
@@ -55,14 +57,18 @@ class BacktestRepository:
                 elif fiat_balance < last_balance:
                     lose_trades = lose_trades + 1
 
-
+            print("simulating {}".format(self.unix_to_readable_date(current_unixtime)))
             print("fiat balance is ${}".format(fiat_balance))
-            print("coin balance is {} worth {}".format(coin_balance, coin_balance * coin_price))
+            print("coin balance is {} worth ${}".format(coin_balance, round(coin_balance * coin_price, 2)))
             if win_trades + lose_trades != 0:
                 winning_rate = round((win_trades/(win_trades + lose_trades)) * 100, 2)
                 print("win rate is {}%".format(winning_rate))
             top_index = top_index + 1
             bottom_index = bottom_index + 1
+
+    def unix_to_readable_date(self, unixtime):
+        timestamp = datetime.fromtimestamp(unixtime)
+        return timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
     # returns buy enum if all algos returns an order to buy, otherwise returns sell enum if all algos returns an order to sell, otherwise returns ignore
     def check_all_algos(self, algo_list, algo_args):
