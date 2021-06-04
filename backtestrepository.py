@@ -25,6 +25,10 @@ class BacktestRepository:
         coin_balance = 0
         bought = 0
 
+        win_trades = 0
+        lose_trades = 0
+        last_balance = fiat_balance # comparatpr used to determine if a trade was won in terms of fiat
+
         while top_index <= len(globalframe.index):
             # get current window dataframe
             focus_frame = globalframe.iloc[bottom_index : top_index]
@@ -33,8 +37,10 @@ class BacktestRepository:
             # add the focus frame to each list in algo arguments list     
             temp_algo_args = list(map(lambda args: [focus_frame] + args, algo_args.copy()))
             algo_response = self.check_all_algos(algo_list, temp_algo_args)
+
        
             if algo_response == AlgoResponse.BUY and bought == 0:
+                last_balance = fiat_balance # store the current fiat balance for comparison for win/loss
                 coin_balance = coin_balance + ((fiat_balance * fiat_percent) / coin_price) * trading_fee 
                 fiat_balance = fiat_balance - (fiat_balance * fiat_percent)
                 bought = 1
@@ -44,8 +50,17 @@ class BacktestRepository:
                 coin_balance = coin_balance - (coin_balance * coin_percent)
                 bought = 0
 
+                if fiat_balance > last_balance:
+                    win_trades = win_trades + 1
+                elif fiat_balance < last_balance:
+                    lose_trades = lose_trades + 1
+
+
             print("fiat balance is ${}".format(fiat_balance))
             print("coin balance is {} worth {}".format(coin_balance, coin_balance * coin_price))
+            if win_trades + lose_trades != 0:
+                winning_rate = round((win_trades/(win_trades + lose_trades)) * 100, 2)
+                print("win rate is {}%".format(winning_rate))
             top_index = top_index + 1
             bottom_index = bottom_index + 1
 
