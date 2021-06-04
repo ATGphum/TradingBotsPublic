@@ -1,2 +1,5 @@
+instructions:
+set API_KEY and API_SECRET envinroment variables to respective binance strings 
+
 pip install python-binance
 pip install bta-lib
