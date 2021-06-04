@@ -54,7 +54,7 @@ def main():
     # length of each subframe during backtest
     df_search_size = 30
 
-    #backtest_repository.run_backtest(TICKER, starting_fiat_balance, trading_fee, algolist, algoargs, KlineInterval._1HOUR.value, fiat_percent, coin_percent, starting_date, ending_date, df_search_size)
+    backtest_repository.run_backtest(TICKER, starting_fiat_balance, trading_fee, algolist, algoargs, KlineInterval._1HOUR.value, fiat_percent, coin_percent, starting_date, ending_date, df_search_size)
 
 if __name__ == '__main__':
     main()
