@@ -40,11 +40,11 @@ def main():
     starting_date = int(dt.replace(tzinfo=timezone.utc).timestamp()) * 1000 # multiply to 1000 for the binance api's weird requirements
     dt2 = datetime(2021, 1, 1)
     ending_date = int(dt2.replace(tzinfo=timezone.utc).timestamp()) * 1000# multiply to 1000 for the binance api's weird requirements
-    #ending_date = None
+    ending_date = None
 
     # percentage of portfolio for each trade
     fiat_percent = 1
-    coin_percent = 0
+    coin_percent = 1
 
     backtest_repository = BacktestRepository(botcontext)
 

@@ -12,5 +12,3 @@ def rsi_algo(df, period=14, cutoff=30):
         return AlgoResponse.BUY
     else:
         return AlgoResponse.IGNORE
-    
-    
