@@ -18,7 +18,7 @@ import btalib
 api_key = os.environ.get('API_KEY')
 api_secret = os.environ.get('API_SECRET')
 
-def main():
+def backtest():
 
     starting_fiat_balance = 10000
 
@@ -54,7 +54,8 @@ def main():
     # length of each subframe during backtest
     df_search_size = 30
 
-    backtest_repository.run_backtest(TICKER, starting_fiat_balance, trading_fee, algolist, algoargs, KlineInterval._1DAY.value, fiat_percent, coin_percent, starting_date, ending_date, df_search_size)
+    result = backtest_repository.run_backtest(TICKER, starting_fiat_balance, trading_fee, algolist, algoargs, KlineInterval._1DAY.value, fiat_percent, coin_percent, starting_date, ending_date, df_search_size)
+    return result
 
 if __name__ == '__main__':
-    main()
+    backtest()
