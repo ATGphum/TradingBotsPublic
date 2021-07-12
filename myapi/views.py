@@ -12,7 +12,6 @@ from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import status
-import json
 
 # Create your views here
 
@@ -22,6 +21,7 @@ class BacktestResultsSetClass(viewsets.ModelViewSet):
 
 class BacktestResultsSet(APIView):
     def post(self, request, format=None):
+        
         test = BacktestResults(fiat_balance=123, coin_balance=123, win_rate=41)
         serializer = BacktestResultsSerializer(test)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
