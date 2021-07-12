@@ -100,7 +100,7 @@ class BacktestRepository:
         coin_df.set_index('date', inplace=True)
 
         # export DataFrame to csv
-        # coin_df.to_csv('{}_bars3.csv'.format(ticker_symbol))
+        coin_df.to_csv('{}_bars3.csv'.format(ticker_symbol))
 
         return coin_df
 

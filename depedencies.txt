@@ -1,5 +1,6 @@
 instructions:
 set API_KEY and API_SECRET envinroment variables to respective binance strings 
+binance client.py has bug where manually setting end_str in get_historical_klines function does not pass over to its helper function
 
 pip install python-binance
 pip install bta-lib

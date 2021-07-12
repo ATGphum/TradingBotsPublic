@@ -46,7 +46,7 @@ class BinanceController:
         # valid intervals - 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w, 1M
         try:
             if latest_time is not None:
-                data = self.client.get_historical_klines(ticker_symbol, interval, earliest_time, latest_time, limit=num_limit)
+                data = self.client.get_historical_klines(ticker_symbol, interval, earliest_time, end_str=latest_time, limit=num_limit)
             else:
                 data = self.client.get_historical_klines(ticker_symbol, interval, earliest_time, limit=num_limit)
             print('succesfully retrieved historical data')

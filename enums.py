@@ -6,6 +6,7 @@ class TickerSymbols(enum.Enum):
     ADAUSDT = 3
     USDCUSDT = 4
     BTCUSDT = 5
+    ETHUSDT = 6
 
 class OrderStatus(enum.Enum):
     NEW = 1
