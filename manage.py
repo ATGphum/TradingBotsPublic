@@ -20,3 +20,14 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+'''
+from myapi.models import BacktestResults
+from myapi.serializers import BacktestResultsSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+
+snippet = BacktestResults(fiat_balance=26, coin_balance=45, win_rate=57)
+
+snippet.save()
+'''

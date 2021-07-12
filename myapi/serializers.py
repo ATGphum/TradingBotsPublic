@@ -7,3 +7,4 @@ class BacktestResultsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BacktestResults
         fields = ('fiat_balance', 'coin_balance', 'win_rate')
+

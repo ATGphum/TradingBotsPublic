@@ -6,4 +6,4 @@ class BacktestResults(models.Model):
     win_rate = models.FloatField()
 
     def __str__(self):
-        return self.name
+        return str(self.win_rate)
