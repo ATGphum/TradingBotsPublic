@@ -30,6 +30,7 @@ class BacktestRepository:
         lose_trades = 0
         last_balance = fiat_balance # comparatpr used to determine if a trade was won in terms of fiat
         winning_rate = 0
+        remainder_after_trade = 1 - trading_fee
 
         while top_index <= len(globalframe.index):
             # get current window dataframe
@@ -44,12 +45,12 @@ class BacktestRepository:
        
             if algo_response == AlgoResponse.BUY and bought == 0:
                 last_balance = fiat_balance # store the current fiat balance for comparison for win/loss
-                coin_balance = coin_balance + ((fiat_balance * fiat_percent) / coin_price) * trading_fee 
+                coin_balance = coin_balance + ((fiat_balance * fiat_percent) / coin_price) * remainder_after_trade 
                 fiat_balance = fiat_balance - (fiat_balance * fiat_percent)
                 bought = 1
 
             if algo_response == AlgoResponse.SELL and bought == 1:
-                fiat_balance = fiat_balance + ((coin_balance * coin_percent) * coin_price) * trading_fee
+                fiat_balance = fiat_balance + ((coin_balance * coin_percent) * coin_price) * remainder_after_trade
                 coin_balance = coin_balance - (coin_balance * coin_percent)
                 bought = 0
 

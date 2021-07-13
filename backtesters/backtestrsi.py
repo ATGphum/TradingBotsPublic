@@ -18,11 +18,11 @@ import btalib
 api_key = os.environ.get('API_KEY')
 api_secret = os.environ.get('API_SECRET')
 
-def backtest():
+def backtest_rsi():
 
     starting_fiat_balance = 10000
 
-    trading_fee = 0.999
+    trading_fee = 0.001
 
     TICKER = TickerSymbols.NANOUSDT.name
 
@@ -58,4 +58,4 @@ def backtest():
     return result
 
 if __name__ == '__main__':
-    backtest()
+    backtest_rsi()
