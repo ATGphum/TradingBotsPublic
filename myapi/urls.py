@@ -12,6 +12,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     #path('', include(router.urls)),
     path('BacktestResults/', views.BacktestResultsSet.as_view()),
+    path('TradingBot/', views.RunTradersSet.as_view()),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 

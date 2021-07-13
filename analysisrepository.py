@@ -9,8 +9,7 @@ class AnalysisRepository:
     def __init__(self, context):
         self.context = context 
 
-    def run_simple_rsi(self, ticker_symbol):
-        interval = KlineInterval._1HOUR.value
+    def run_simple_rsi(self, ticker_symbol, interval):
         timeframe = int((time.time() - (7 * 3 * 60 * 60)) * 1000)
 
         # retrieve dataframe

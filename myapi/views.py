@@ -18,6 +18,7 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import status
 
+from bots.simplersi import simple_rsi, simple_rsi_external
 from backtesters.backtestrsi import backtest_rsi, backtest_rsi_external
 
 # Create your views here
@@ -26,10 +27,16 @@ class BacktestResultsSetClass(viewsets.ModelViewSet):
     queryset = BacktestResults.objects.all()
     serializer_class = BacktestResultsSerializer
 
+class RunTradersSet(APIView):
+    def post(self, request, format=None):
+
+        trigger = simple_rsi_external(request.data)
+        
+        return Response()
+
 class BacktestResultsSet(APIView):
     def post(self, request, format=None):
 
-        #result = backtest_rsi()
         result = backtest_rsi_external(request.data) #pass in json arguments
         resultmodel = BacktestResults(fiat_balance=result[0], coin_balance=result[1], win_rate=result[2])
         serializer = BacktestResultsSerializer(resultmodel)
