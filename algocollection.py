@@ -12,3 +12,8 @@ def rsi_algo(df, period=14, cutoff=30):
         return AlgoResponse.BUY
     else:
         return AlgoResponse.IGNORE
+
+# returns a reference to each algo function when given the name in string
+string_to_reference = {
+    "rsi_algo": rsi_algo
+}
