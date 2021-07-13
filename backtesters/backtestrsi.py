@@ -60,7 +60,7 @@ def backtest_rsi():
 
 # function which accepts a dictionary for backtest arguments
 def backtest_rsi_external(args):
-    print(args)
+
     TICKER = args["ticker"]
     starting_fiat_balance = args["starting_fiat_balance"]
     starting_coin_balance = args["starting_coin_balance"]
