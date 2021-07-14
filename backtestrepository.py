@@ -31,6 +31,7 @@ class BacktestRepository:
         last_balance = fiat_balance # comparatpr used to determine if a trade was won in terms of fiat
         winning_rate = 0
         remainder_after_trade = 1 - trading_fee
+        coin_worth = 0
 
         while top_index <= len(globalframe.index):
             # get current window dataframe
@@ -61,13 +62,14 @@ class BacktestRepository:
 
             print("simulating {}".format(self.unix_to_readable_date(current_unixtime)))
             print("fiat balance is ${}".format(fiat_balance))
-            print("coin balance is {} worth ${}".format(coin_balance, round(coin_balance * coin_price, 2)))
+            coin_worth = round(coin_balance * coin_price, 2)
+            print("coin balance is {} worth ${}".format(coin_balance, coin_worth))
             if win_trades + lose_trades != 0:
                 winning_rate = round((win_trades/(win_trades + lose_trades)) * 100, 2)
                 print("win rate is {}%".format(winning_rate))
             top_index = top_index + 1
             bottom_index = bottom_index + 1
-        return (fiat_balance, coin_balance, winning_rate)
+        return (fiat_balance, coin_balance, coin_worth, winning_rate)
 
     def unix_to_readable_date(self, unixtime):
         timestamp = datetime.fromtimestamp(unixtime)

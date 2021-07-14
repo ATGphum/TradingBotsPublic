@@ -38,7 +38,7 @@ class BacktestResultsSet(APIView):
     def post(self, request, format=None):
 
         result = backtest_rsi_external(request.data) #pass in json arguments
-        resultmodel = BacktestResults(fiat_balance=result[0], coin_balance=result[1], win_rate=result[2])
+        resultmodel = BacktestResults(fiat_balance=result[0], coin_balance=result[1], coin_worth=result[2], win_rate=result[3])
         serializer = BacktestResultsSerializer(resultmodel)
 
         #if serializer.is_valid():

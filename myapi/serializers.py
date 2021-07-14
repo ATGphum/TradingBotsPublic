@@ -6,5 +6,5 @@ from .models import BacktestResults
 class BacktestResultsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = BacktestResults
-        fields = ('fiat_balance', 'coin_balance', 'win_rate')
+        fields = ('fiat_balance', 'coin_balance', 'coin_worth', 'win_rate')
 
